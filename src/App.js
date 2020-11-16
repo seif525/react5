@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css'
+
+class App extends React.Component {
+  constructor() {
+    super()
+
+    this.state = {
+      person: {
+        fullName: 'seif eddine jedda',
+        bio: 'Welcome',
+        imgSrc: './dowload.jpg',
+        profession: 'architecture',
+      },
+
+      show: false,
+      counter: 0
+    }
+  }
+
+
+  change = () => {
+    this.setState({
+      show: !this.state.show
+    })
+  }
+  increment = () => {
+    const {counter}= this.state;
+    this.setState({counter: counter + 1})
+    
+  }
+
+  componentDidMount(){
+
+setInterval(this.increment, 1000) 
+  
 }
 
+  render() {
+
+
+    return (
+      <div className='App'>
+        Component Life Cycle : {this.state.counter} <br />
+        <button style={{ width: '200px', height: '30px' }} onClick={this.change}> switch</button>
+
+        {this.state.show ?
+          <div><br />
+            <p>{this.state.person.fullName}</p><br />
+            <p>{this.state.person.bio}</p><br />
+            <p>{this.state.person.profession}</p><br />
+            <img alt='not me' src={this.state.person.imgSrc} /><br />
+          </div> : <p>Profile</p>}
+
+
+      </div>
+
+    )
+  }
+}
 export default App;
